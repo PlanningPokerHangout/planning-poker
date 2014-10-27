@@ -1,0 +1,9 @@
+Still Need:
+  - Styling
+  - Click option updates state
+  - Moderator mode (given to first person in app; can be requested)
+    - Start Round
+    - Setup Points
+    - Close Round (auto close?)
+    - Label Round
+  - History

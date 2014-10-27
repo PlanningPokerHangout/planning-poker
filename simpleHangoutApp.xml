@@ -20,36 +20,16 @@
         <Content type="html"><![CDATA[     
 
 <html>
-<style type="text/css">
-<!--
-.button {
-  border-radius: 3px;
-  -moz-border-radius: 3px;
-  background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#ddd));
-  background: -moz-linear-gradient(top, #fff, #ddd);  
-  border: 1px solid #bbb;
-}
-
-.button:active {
-        background: -webkit-gradient(linear, left top, left bottom, from(#aaa), to(#333)); 
-        background: -moz-linear-gradient(bottom, #ddd, #aaa); }
-
--->
-</style>
+<head>
+    <link rel="stylesheet" href="//willishq-hangout-test.herokuapp.com/app.css">
+</head>
 <body>
 
 <script src="//plus.google.com/hangouts/_/api/v1/hangout.js"></script>
 
-<h3>Simple Hangout App</h3>
-
-<p>
-<input class="button" type="button" value="Show participants!" id="showParticipants" 
-    style="visibility:hidden;"
-    onClick="showParticipants()"/>
-</p>
+<h3>Planning Poker</h3>
 
 <div id="participantsDiv"></div>
-
 <hr>
 
 <p><a href="http://developers.google.com/+/hangouts/getting-started">Read the docs</a> to learn more about developing hangouts!</a></p>

@@ -1,0 +1,106 @@
+body {
+  margin: 20px;
+  background: rgb(24, 24, 24);
+  color: rgb(161, 161, 161);
+}
+.button {
+  border-radius: 3px;
+  -moz-border-radius: 3px;
+  background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#ddd));
+  background: -moz-linear-gradient(top, #fff, #ddd);  
+  border: 1px solid #bbb;
+}
+
+.button:active {
+  background: -webkit-gradient(linear, left top, left bottom, from(#aaa), to(#333)); 
+  background: -moz-linear-gradient(bottom, #ddd, #aaa);
+}
+
+h1,h2,h3,h4 {
+  color: rgb(161, 161, 161);
+  text-align: center;
+}
+
+.participants {
+  list-style-type: none;
+}
+
+.participant {
+  position: relative;
+  border: 1px solid rgb(161,161,161);
+  border-radius: 5px;
+  width: 100%;
+  margin-bottom: 2px;
+}
+
+.participant .name {
+  text-align: left;
+  overflow-wrap: break-word;
+  margin-right: 35px;
+  padding: 5px;
+}
+
+.participant .score-hidden {
+  display: none;
+}
+
+.participant .score {
+  position: absolute;
+  color: white;
+  background: red;
+  border-radius: 5px;
+  padding: 3px;
+  top: 0;
+  right: 0;
+  min-width: 2em;
+  height: 2em;
+  font-size: 8pt;
+  text-align: center;
+}
+
+.options {
+  margin: 0;
+  width: 100%;
+}
+
+.option {
+  border: 1px solid rgb(161,161,161);
+  border-radius: 5px;
+  padding: 5px;
+  margin: 0;
+  text-align: center;
+  font-size: 10pt;
+  width: 33.3%;
+  float: left;
+}
+
+.option.selected {
+  border: 1px solid yellow;
+}
+
+.option:hover {
+  background: rgb(54, 54, 54);
+}
+
+.main-container {
+    float:left;
+    position:relative;
+    left:50%;
+    clear: both;
+}
+
+.fixer-container {
+    float:left;
+    position:relative;
+    left:-50%;
+}
+
+.list-of-floating-elements {
+  list-style:none;
+}
+
+.floated {
+  float:left; 
+  margin-right: 10px;
+  margin-bottom: 10px;
+}
