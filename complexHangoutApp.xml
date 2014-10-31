@@ -33,7 +33,7 @@
 
 <div id="app"></div>
 
-<script src="//willishq-hangout-test.herokuapp.com/build/bundle.js"></script>
+<script src="//localhost/build/bundle.js"></script>
 </body>
 </html>
 ]]>
