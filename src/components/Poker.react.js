@@ -1,7 +1,9 @@
 /** @jsx React.DOM */
 
-var React = require('react');
 var gapi = window.gapi;
+
+var React = require('react');
+var _ = require('underscore');
 
 var Option = require('./Option.react');
 var Participant = require('./Participant.react');
@@ -40,11 +42,22 @@ var Poker = React.createClass({
       hangoutState: eventObj.state
     });
   },
+  _showScores: function() {
+    function get_ids(participant) {
+      return participant.person.id;
+    }
+    var state = this.state.hangoutState;
+    function has_made_decision(id) {
+      return state[id] !== undefined;
+    }
+    return _.map(this.state.participants, get_ids).every(has_made_decision);
+  },
   render: function() {
     var id = this.state.myID;
     var state = this.state.hangoutState;
+    var show_scores = this._showScores();
     var participants = this.state.participants.map(function(participant) {
-      var score = state[participant.person.id] || false;
+      var score = show_scores ? state[participant.person.id] : false;
       return (
         <Participant participant={participant.person} key={participant.person.id} score={score} />
       );
@@ -57,7 +70,7 @@ var Poker = React.createClass({
     });
     return (
       <div>
-        <h4>Participants</h4>
+        <h4>Participants!</h4>
         <ul className="participants">
           {participants}
         </ul>
