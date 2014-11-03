@@ -10,7 +10,7 @@
   "devDependencies": {
     "browserify": "^6.2.0",
     "envify": "~2.0.1",
-    "reactify": "~0.14.0",
+    "reactify": "~0.15.2",
     "browserify-shim": "^3.8.0"
   },
   "scripts": {
