@@ -84,9 +84,9 @@ var Poker = React.createClass({
         <ul className="options">
           {choices}
         </ul>
-        <div class="row">
-          <div class="small-7 small-centered columns">
-            <button class="reset" onClick={this._resetScores}>Reset Voting</button>
+        <div className="row">
+          <div className="small-7 small-centered columns">
+            <button className="reset" onClick={this._resetScores}>Reset Voting</button>
           </div>
         </div>
       </div>
