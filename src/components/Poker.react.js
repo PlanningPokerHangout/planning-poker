@@ -52,6 +52,12 @@ var Poker = React.createClass({
     }
     return _.map(this.state.participants, get_ids).every(has_made_decision);
   },
+  _resetScores: function() {
+    function get_ids(participant) {
+      return participant.person.id;
+    }
+    gapi.hangout.data.submitDelta([], _.map(this.state.participants, get_ids));
+  },
   render: function() {
     var id = this.state.myID;
     var state = this.state.hangoutState;
@@ -78,6 +84,7 @@ var Poker = React.createClass({
         <ul className="options">
           {choices}
         </ul>
+        <button onClick={this._resetScores} >Reset Voting</button>
       </div>
     );
   }
