@@ -82,6 +82,10 @@ h1,h2,h3,h4 {
   background: rgb(54, 54, 54);
 }
 
+button.reset {
+  margin: 5px 0;
+}
+
 .main-container {
     float:left;
     position:relative;
