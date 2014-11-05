@@ -31,7 +31,9 @@
 
 <h3>Planning Poker</h3>
 
-<div id="app"></div>
+<div id="app">
+    Waiting for Hangout API.
+</div>
 
 <script src="//willishq-hangout-test.herokuapp.com/build/bundle.js"></script>
 </body>
