@@ -9,41 +9,24 @@ h1,h2,h3,h4 {
   text-align: center;
 }
 
-.participants {
-  list-style-type: none;
-}
-
-.participant {
-  position: relative;
-  border: 1px solid rgb(161,161,161);
+li.participant {
   border-radius: 5px;
-  width: 100%;
-  margin-bottom: 2px;
-}
-
-.participant .name {
-  text-align: left;
-  overflow-wrap: break-word;
-  margin-right: 35px;
+  margin: 0;
   padding: 5px;
 }
 
-.participant .score-hidden {
-  display: none;
+li.participant.inactive {
+  color: rgb(81,81,81);
 }
 
-.participant .score {
-  position: absolute;
-  color: white;
-  background: red;
-  border-radius: 5px;
-  padding: 3px;
-  top: 0;
-  right: 0;
-  min-width: 2em;
-  height: 2em;
-  font-size: 8pt;
-  text-align: center;
+li.participant .name {
+  margin: 0;
+  padding: 0;
+}
+
+li.participant .score {
+  margin: 0;
+  padding: 0;
 }
 
 .button {
