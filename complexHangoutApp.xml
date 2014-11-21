@@ -32,7 +32,11 @@
 <h3>Planning Poker</h3>
 
 <div id="app">
-    Waiting for Hangout API.
+  <div class="row">
+    <div class="columns small-12" style="text-align: center">
+      Initializing...
+    </div>
+  </div>
 </div>
 
 <script src="//willishq-hangout-test.herokuapp.com/build/bundle.js"></script>
