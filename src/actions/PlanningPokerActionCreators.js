@@ -28,10 +28,25 @@ module.exports = {
       participants: participants
     });
   },
-  updateHangoutState: function(state) {
+  updateLocalParticipant: function(participant) {
     PlanningPokerAppDispatcher.handleServerAction({
-      type: ActionTypes.HANGOUT_STATE_UPDATED,
-      state: state
+      type: ActionTypes.LOCAL_PARTICIPANT_UPDATED,
+      participant: participant
+    });
+  },
+  updateVotes: function(votes) {
+    PlanningPokerAppDispatcher.handleServerAction({
+      type: ActionTypes.VOTES_CHANGED,
+      votes: votes
+    });
+  },
+  setInitialData: function(initialData) {
+    PlanningPokerAppDispatcher.handleServerAction({
+      type: ActionTypes.INITIALIZED,
+      localParticipant: initialData.localParticipant,
+      participants: initialData.participants,
+      votes: initialData.votes
     });
   }
+
 };

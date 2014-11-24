@@ -4,6 +4,9 @@
   "description": "Scrum Planning Poker App for Google Hangouts",
   "main": "src/app.js",
   "dependencies": {
+    "flux": "^2.0.1",
+    "keymirror": "^0.1.0",
+    "object-assign": "^2.0.0",
     "react": "^0.12.0",
     "underscore": "^1.7.0"
   },

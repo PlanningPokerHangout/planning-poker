@@ -1,57 +1,47 @@
 /** @jsx React.DOM */
 
 var React = require('react/addons');
-var PlanningPokerStore = require('../stores/PlanningPokerStore');
+
+var ParticipantStore = require('../stores/ParticipantStore');
+var VoteStore = require('../stores/VoteStore');
+var SettingsStore = require('../stores/SettingsStore');
+
+var _ = require('underscore');
 
 var CHECK_MARK = "\u2713";
 
-var Score = React.createClass({
-  render: function() {
-    var value = this.props.usePlaceholder ? CHECK_MARK : this.props.value;
-
-    var element; 
-    switch(this.props.value) {
-      case undefined:
-        element = null;
-        break;
-      default:
-        element = (
-          <div className="score">{value}</div>
-        );
-        break;
-    }
-
-    return element;
-  }
-});
-
 var Participant = React.createClass({
   render: function() { 
-    var value;
-    if (!this.props.participant) {
-      value = "A participant not running this app.";
-    } else {
-      value = this.props.participant.person.displayName;
-    }
+    var displayName = this.props.participant.person.displayName;
+    var vote = this.props.vote;
+    var voteValue = vote.reveal ? vote.value : vote.default;
+
+    var cx = React.addons.classSet;
+    var participantClasses = cx({
+      'participant': true,
+      'inactive': !this.props.participant.hasAppEnabled,
+    });
+    var scoreClasses = cx({
+      'score': true,
+      'right': true,
+      'hide': _.isNull(vote.value),
+    });
 
     return (
-      <div className="columns small-12 medium-6 large-4">
-        <div className="participant">
-          <div className="name">{value}</div>
-          <Score 
-            value={this.props.participant.vote} 
-            usePlaceholder={!this.props.displayScore} 
-            />
-        </div>
-      </div>
+      <li className={participantClasses}>
+        <p className="name">
+          <span className={scoreClasses}>{voteValue}</span>
+          {displayName}
+        </p>
+      </li>
     );
   }
 });
 
 function _getStateFromStore() {
   return {
-    participants: PlanningPokerStore.getParticipants(),
-    displayScores: PlanningPokerStore.displayScores(),
+    participants: ParticipantStore.getParticipants(),
+    displayScores: SettingsStore.shouldDisplayScores(),
   };
 }
 
@@ -60,23 +50,33 @@ var Participants = React.createClass({
     return _getStateFromStore();
   },
   componentDidMount: function() {
-    PlanningPokerStore.addChangeListener(this._onChange);
+    ParticipantStore.addChangeListener(this._onChange);
+    VoteStore.addChangeListener(this._onChange);
+    SettingsStore.addChangeListener(this._onChange);
   },
   componentWillUnmount: function() {
-    PlanningPokerStore.removeChangeListener(this._onChange);
+    ParticipantStore.removeChangeListener(this._onChange);
+    VoteStore.removeChangeListener(this._onChange);
+    SettingsStore.removeChangeListener(this._onChange);
   },
   _onChange: function() {
     this.setState(_getStateFromStore());
   },
-
   render: function() {
-    var displayScore = this.state.displayScores;
+    var revealScores = this.state.displayScores;
+
     function _renderParticipant(participant) {
+      var vote = {
+        reveal: revealScores,
+        value: VoteStore.getVoteByID(participant.id),
+        default: CHECK_MARK,
+      };
+
       return (
         <Participant 
           participant={participant} 
+          vote={vote}
           key={participant.id} 
-          displayScore={displayScore}
           />
       );
     }
@@ -86,17 +86,18 @@ var Participants = React.createClass({
 
     return (
       <div className="participants">
-        <h4>Active Participants</h4>
+        <h4>Participants</h4>
         <div className="row">
-          {activeParticipants}
-        </div>
-        <h4>Inactive Participants</h4>
-        <div className="row">
-          {inactiveParticipants}
+          <div className="columns small-offset-1 small-10">
+            <ul className="small-block-grid-1 medium-block-grid-2 large-block-grid-3">
+              {activeParticipants}
+              {inactiveParticipants}
+            </ul>
+          </div>
         </div>
       </div>
     );
   }
 });
 
-module.exports = Participants
+module.exports = Participants;

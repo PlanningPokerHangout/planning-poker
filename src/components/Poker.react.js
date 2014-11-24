@@ -3,45 +3,48 @@
 var React = require('react/addons');
 var _ = require('underscore');
 
-var utils = require('../utils');
-
-var Options = require('./Options.react');
+// Components
+var Ballot = require('./Ballot.react');
 var Participants = require('./Participants.react');
 var Moderator = require('./Moderator.react');
 
-var Actions = require('../actions/PlanningPokerActionCreators');
-var PlanningPokerStore = require('../stores/PlanningPokerStore');
+// Stores
+var SettingsStore = require('../stores/SettingsStore');
 
 function _getStateFromStore() {
   return {
-    displayScores: PlanningPokerStore.displayScores(),
-    participants: PlanningPokerStore.getParticipants(),
-    me: PlanningPokerStore.getLocalParticipant()
+    initialized: SettingsStore.appIsInitialized(),
   };
 }
 
 var Poker = React.createClass({
-  getInitialState: function () {
+  getInitialState: function() {
     return _getStateFromStore();
   },
   componentDidMount: function() {
-    PlanningPokerStore.addChangeListener(this._onChange);
+    SettingsStore.addChangeListener(this._onChange);
   },
   componentWillUnmount: function() {
-    PlanningPokerStore.removeChangeListener(this._onChange);
+    SettingsStore.removeChangeListener(this._onChange);
   },
   _onChange: function() {
     this.setState(_getStateFromStore());
   },
   render: function() {
-    var id = this.state.myID;
-    var state = this.state.hangoutState;
-    var showScores = this.state.showScores;
-
+    if (!this.state.initialized) {
+      
+      return (
+        <div className="row">
+          <div className="columns small-12 text-center">
+            Initializing......
+          </div>
+        </div>
+      );
+    }
     return (
       <div>
         <Participants />
-        <Options />
+        <Ballot />
         <Moderator />
       </div>
     );

@@ -6,65 +6,102 @@ var Actions = require('../actions/PlanningPokerActionCreators');
 var ActionTypes = PlanningPokerConstants.ActionTypes;
 var CHANGE_EVENT = 'change';
 
-var PlanningPokerStore = require('../stores/PlanningPokerStore');
+var ParticipantStore = require('../stores/ParticipantStore');
 
 var EventEmitter = require('events').EventEmitter;
 var _ = require('underscore');
 
+/* Utility Functions */
+function getParticipantIDS() {
+  var participants = ParticipantStore.getParticipants().all;
+  var participantIDS = _.pluck(participants, 'id');
 
-function _peopleChanged(eventObj) {
+  return participantIDS;
+}
+function getVotesFromState(state) {
+  var participantIDS = getParticipantIDS();
+  var votes = _.pick(state, participantIDS);
+
+  return votes;
+}
+/* End Utility Functions */
+
+/* Hangout Event Callbacks */
+function peopleChanged(eventObj) {
   Actions.updateParticipants(eventObj.participants);
 }
 
-function _hangoutStateChanged(eventObj) {
-  Actions.updateHangoutState(eventObj.state);
+function hangoutStateChanged(eventObj) {
+  var state = eventObj.state;
+  var votes = getVotesFromState(state);
+  Actions.updateVotes(votes);
 }
 
-function _registerHangoutCallbacks() {
-  gapi.hangout.onParticipantsChanged.add(_peopleChanged);
-  gapi.hangout.data.onStateChanged.add(_hangoutStateChanged);
+function initializeHangout() {
+  var localParticipantId = gapi.hangout.getLocalParticipantId();
+  var localParticipant = gapi.hangout.getParticipantById(localParticipantId);
+
+  var participants = gapi.hangout.getParticipants();
+
+  var state = gapi.hangout.data.getState();
+  var votes = getVotesFromState(state);
+
+  setTimeout(function() {
+    Actions.setInitialData({
+      localParticipant: localParticipant, 
+      participants: participants, 
+      votes: votes,
+    });
+  }, 5);
 }
 
-function _selectCard(value) {
-  var me = PlanningPokerStore.getLocalParticipant();
+function registerHangoutCallbacks() {
+  gapi.hangout.onApiReady.add(initializeHangout);
+  gapi.hangout.onParticipantsChanged.add(peopleChanged);
+  gapi.hangout.data.onStateChanged.add(hangoutStateChanged);
+}
+/* End Hangout Event Callbacks */
+
+/* Update Google Hangout Data */
+
+// Results in a data.onStateChanged event for all users
+function selectCard(value) {
+  var me = ParticipantStore.getLocalParticipant();
   gapi.hangout.data.setValue(me.id, value);
 }
 
-function _resetScores() {
-  gapi.hangout.data.submitDelta([], PlanningPokerStore.getParticipantIds());
+// Results in a onParticipantsChanged event for all users
+function resetScores() {
+  gapi.hangout.data.submitDelta(
+    [], // to add
+    getParticipantIDS() // to remove
+  );
 }
 
-var GoogleHangoutDAO = _.extend(EventEmitter.prototype, {
-  init: function() {
-    _registerHangoutCallbacks();
-  },
-  emitChange: function() {
-    this.emit(CHANGE_EVENT);
-  },
+/* End Update Google Hangout Data */
 
-  /**
-   * @param {function} callback
-   */
-  addChangeListener: function(callback) {
-    this.on(CHANGE_EVENT, callback);
+
+var GoogleHangoutDAO = {
+  init: function() {
+    registerHangoutCallbacks();
   }
-});
+};
+
 
 GoogleHangoutDAO.dispatchToken = PlanningPokerAppDispatcher.register(function(payload) {
   var action = payload.action;
 
   switch(action.type) {
     case ActionTypes.RESET_SCORES:
-      _resetScores();
-      GoogleHangoutDAO.emitChange();
+      resetScores();
       break;
     case ActionTypes.SELECT_CARD:
-      _selectCard(action.cardValue);
-      GoogleHangoutDAO.emitChange();
+      selectCard(action.cardValue);
       break;
     default:
       // do nothing
     }
 });
+
 
 module.exports = GoogleHangoutDAO;

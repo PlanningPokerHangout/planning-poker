@@ -1,10 +1,10 @@
 var PlanningPokerConstants = require('../constants/PlanningPokerConstants.js');
-var Dispatcher = require('./Dispatcher');
-var _ = require('underscore');
+var Dispatcher = require('flux').Dispatcher;
+var assign = require('object-assign');
 
 var PayloadSources = PlanningPokerConstants.PayloadSources;
 
-var PlanningPokerAppDispatcher = _.extend(new Dispatcher(), {
+var PlanningPokerAppDispatcher = assign(new Dispatcher(), {
 
   /**
    * @param {object} action The details of the action, including the action's

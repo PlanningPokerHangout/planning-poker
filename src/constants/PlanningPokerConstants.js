@@ -1,13 +1,14 @@
-var keyMirror = require('react/lib/keyMirror');
+var keyMirror = require('keymirror');
 
 module.exports = {
 
   ActionTypes: keyMirror({
-    RESET_SCORES: null,
-    TOGGLE_SCORE_DISPLAY: null,
-    SELECT_CARD: null,
+    INITIALIZED: null,
     PARTICIPANTS_UPDATED: null,
-    HANGOUT_STATE_UPDATED: null
+    TOGGLE_SCORE_DISPLAY: null,
+    VOTES_CHANGED: null,
+    RESET_SCORES: null,
+    SELECT_CARD: null,
   }),
 
   PayloadSources: keyMirror({
