@@ -21,9 +21,9 @@
 
 <html>
 <head>
-    <link rel="stylesheet" href="//willishq-hangout-test.herokuapp.com/foundation/css/normalize.css">
-    <link rel="stylesheet" href="//willishq-hangout-test.herokuapp.com/foundation/css/foundation.css">
-    <link rel="stylesheet" href="//willishq-hangout-test.herokuapp.com/app.css">
+    <link rel="stylesheet" href="//blog.willishq.com/planning-poker-hangout-app/foundation/css/normalize.css">
+    <link rel="stylesheet" href="//blog.willishq.com/planning-poker-hangout-app/foundation/css/foundation.css">
+    <link rel="stylesheet" href="//blog.willishq.com/planning-poker-hangout-app/app.css">
 </head>
 <body>
 
@@ -39,7 +39,7 @@
   </div>
 </div>
 
-<script src="//willishq-hangout-test.herokuapp.com/build/bundle.js"></script>
+<script src="//blog.willishq.com/planning-poker-hangout-app/build/bundle.js"></script>
 </body>
 </html>
 ]]>
