@@ -21,9 +21,9 @@
 
 <html>
 <head>
-    <link rel="stylesheet" href="//planningpokerhangout.github.io/foundation/css/normalize.css">
-    <link rel="stylesheet" href="//planningpokerhangout.github.io/foundation/css/foundation.css">
-    <link rel="stylesheet" href="//planningpokerhangout.github.io/app.css">
+    <link rel="stylesheet" href="//planningpokerhangout.github.io/planning-poker/foundation/css/normalize.css">
+    <link rel="stylesheet" href="//planningpokerhangout.github.io/planning-poker/foundation/css/foundation.css">
+    <link rel="stylesheet" href="//planningpokerhangout.github.io/planning-poker/app.css">
 </head>
 <body>
 
@@ -39,7 +39,7 @@
   </div>
 </div>
 
-<script src="//planningpokerhangout.github.io/build/bundle.js"></script>
+<script src="//planningpokerhangout.github.io/planning-poker/build/bundle.js"></script>
 </body>
 </html>
 ]]>
