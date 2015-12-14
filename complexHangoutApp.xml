@@ -39,7 +39,8 @@
   </div>
 </div>
 
-<script src="//planningpokerhangout.github.io/planning-poker/build/bundle.js"></script>
+<script src="//planningpokerhangout.github.io/planning-poker/build/vendor.js"></script>
+<script src="//planningpokerhangout.github.io/planning-poker/build/main.js"></script>
 </body>
 </html>
 ]]>
