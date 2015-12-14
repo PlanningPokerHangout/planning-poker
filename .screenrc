@@ -1,0 +1,13 @@
+sessionname hangout-app
+caption always
+zombie kr
+
+screen -t watch         0 fish -ic 'webpack -w'
+screen -t devserver     1 fish -ic 'webpack-dev-server --hot --port 10000 --content-base static/'
+screen -t editor        2 fish -ic 'vi .'
+screen -t fish          3 fish -i
+
+select 3
+select 2
+
+caption always

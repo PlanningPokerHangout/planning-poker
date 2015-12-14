@@ -19,6 +19,7 @@
     "babel-preset-stage-2": "^6.3.13",
     "eslint-plugin-react": "^3.11.3",
     "gulp": "^3.9.0",
+    "gulp-copy": "0.0.2",
     "gulp-gh-pages": "^0.5.4",
     "webpack": "^1.12.9",
     "webpack-split-by-path": "0.0.7"
