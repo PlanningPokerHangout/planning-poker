@@ -5,7 +5,6 @@ var gulp = require('gulp'),
     ghPages = require('gulp-gh-pages'),
     git = require('gulp-git'),
     spawn = require('child_process').spawn,
-    streamToPromise = require('stream-to-promise'),
     tag_version = require('gulp-tag-version');
 
 
