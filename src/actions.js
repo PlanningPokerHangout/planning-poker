@@ -1,20 +1,20 @@
-import PlanningPokerAppDispatcher from './dispatcher/PlanningPokerAppDispatcher.js';
+import AppDispatcher from './dispatcher/PlanningPokerAppDispatcher.js';
 import { ActionTypes } from './constants';
 
 export function resetScores() {
-    PlanningPokerAppDispatcher.handleViewAction({
+    AppDispatcher.handleAction({
         type: ActionTypes.RESET_SCORES,
     });
 }
 
 export function toggleScoreDisplay() {
-    PlanningPokerAppDispatcher.handleViewAction({
+    AppDispatcher.handleAction({
         type: ActionTypes.TOGGLE_SCORE_DISPLAY,
     });
 }
 
 export function selectCard(participantID, cardValue) {
-    PlanningPokerAppDispatcher.handleViewAction({
+    AppDispatcher.handleAction({
         type: ActionTypes.SELECT_CARD,
         participantID: participantID,
         cardValue: cardValue,
@@ -22,28 +22,28 @@ export function selectCard(participantID, cardValue) {
 }
 
 export function updateParticipants(participants) {
-    PlanningPokerAppDispatcher.handleServerAction({
+    AppDispatcher.handleAction({
         type: ActionTypes.PARTICIPANTS_UPDATED,
         participants: participants,
     });
 }
 
 export function updateLocalParticipant(participant) {
-    PlanningPokerAppDispatcher.handleServerAction({
+    AppDispatcher.handleAction({
         type: ActionTypes.LOCAL_PARTICIPANT_UPDATED,
         participant: participant,
     });
 }
 
 export function updateVotes(votes) {
-    PlanningPokerAppDispatcher.handleServerAction({
+    AppDispatcher.handleAction({
         type: ActionTypes.VOTES_CHANGED,
         votes: votes,
     });
 }
 
 export function setInitialData(initialData) {
-    PlanningPokerAppDispatcher.handleServerAction({
+    AppDispatcher.handleAction({
         type: ActionTypes.INITIALIZED,
         localParticipant: initialData.localParticipant,
         participants: initialData.participants,

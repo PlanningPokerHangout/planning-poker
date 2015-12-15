@@ -2,7 +2,7 @@ var gapi = window.gapi;
 
 import { updateParticipants, updateVotes, setInitialData } from './actions';
 import ParticipantStore from './stores/ParticipantStore';
-import PlanningPokerAppDispatcher from './dispatcher/PlanningPokerAppDispatcher';
+import AppDispatcher from './dispatcher/PlanningPokerAppDispatcher';
 import _ from 'underscore';
 import { ActionTypes } from './constants';
 
@@ -84,7 +84,7 @@ var GoogleHangoutDAO = {
 };
 
 
-GoogleHangoutDAO.dispatchToken = PlanningPokerAppDispatcher.register(function(payload) {
+GoogleHangoutDAO.dispatchToken = AppDispatcher.register(function(payload) {
     var action = payload.action;
 
     switch(action.type) {

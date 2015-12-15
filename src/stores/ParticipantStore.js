@@ -1,4 +1,4 @@
-import PlanningPokerAppDispatcher from '../dispatcher/PlanningPokerAppDispatcher';
+import AppDispatcher from '../dispatcher/PlanningPokerAppDispatcher';
 import _ from 'underscore';
 import { ActionTypes } from '../constants';
 import { EventEmitter } from 'events';
@@ -45,7 +45,7 @@ var ParticipantStore = _.extend({
 
 }, EventEmitter.prototype);
 
-ParticipantStore.dispatchToken = PlanningPokerAppDispatcher.register(function(payload) {
+ParticipantStore.dispatchToken = AppDispatcher.register(function(payload) {
     var action = payload.action;
 
     switch(action.type) {

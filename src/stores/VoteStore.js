@@ -1,5 +1,5 @@
 import EventEmitter from 'events';
-import PlanningPokerAppDispatcher from '../dispatcher/PlanningPokerAppDispatcher.js';
+import AppDispatcher from '../dispatcher/PlanningPokerAppDispatcher.js';
 import _ from 'underscore';
 import { ActionTypes } from '../constants';
 
@@ -27,7 +27,7 @@ function updateVotes(updatedVotes) {
     votes = updatedVotes;
 }
 
-VoteStore.dispatchToken = PlanningPokerAppDispatcher.register(function(payload) {
+VoteStore.dispatchToken = AppDispatcher.register(function(payload) {
     var action = payload.action;
 
     switch (action.type) {

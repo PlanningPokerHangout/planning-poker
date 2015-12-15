@@ -8,8 +8,3 @@ export const ActionTypes = keyMirror({
     RESET_SCORES: null,
     SELECT_CARD: null,
 });
-
-export const PayloadSources = keyMirror({
-    SERVER_ACTION: null,
-    VIEW_ACTION: null,
-});
