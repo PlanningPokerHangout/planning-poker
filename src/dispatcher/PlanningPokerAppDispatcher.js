@@ -1,6 +1,6 @@
 import assign from 'object-assign';
 import { Dispatcher } from 'flux';
-import { PayloadSources } from '../constants/PlanningPokerConstants.js';
+import { PayloadSources } from '../constants';
 
 var PlanningPokerAppDispatcher = assign(new Dispatcher(), {
     /**

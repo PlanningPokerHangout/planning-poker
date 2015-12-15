@@ -1,7 +1,5 @@
-var PlanningPokerAppDispatcher = require('./dispatcher/PlanningPokerAppDispatcher.js');
-var PlanningPokerConstants = require('./constants/PlanningPokerConstants.js');
-
-var ActionTypes = PlanningPokerConstants.ActionTypes;
+import PlanningPokerAppDispatcher from './dispatcher/PlanningPokerAppDispatcher.js';
+import { ActionTypes } from './constants';
 
 export function resetScores() {
     PlanningPokerAppDispatcher.handleViewAction({

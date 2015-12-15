@@ -1,10 +1,10 @@
 var gapi = window.gapi;
 
-import { updateParticipants, updateVotes, setInitialData } from '../actions';
-import ParticipantStore from '../stores/ParticipantStore';
-import PlanningPokerAppDispatcher from '../dispatcher/PlanningPokerAppDispatcher';
+import { updateParticipants, updateVotes, setInitialData } from './actions';
+import ParticipantStore from './stores/ParticipantStore';
+import PlanningPokerAppDispatcher from './dispatcher/PlanningPokerAppDispatcher';
 import _ from 'underscore';
-import { ActionTypes } from '../constants/PlanningPokerConstants';
+import { ActionTypes } from './constants';
 
 
 /* Utility Functions */

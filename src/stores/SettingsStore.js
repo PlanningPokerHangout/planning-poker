@@ -1,6 +1,6 @@
 import AppDispatcher from '../dispatcher/PlanningPokerAppDispatcher';
 import _ from 'underscore';
-import { ActionTypes } from '../constants/PlanningPokerConstants.js';
+import { ActionTypes } from '../constants';
 import { EventEmitter } from 'events';
 
 var CHANGE_EVENT = 'change';

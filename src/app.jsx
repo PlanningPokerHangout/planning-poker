@@ -1,7 +1,7 @@
-var React = require('react');
+import React from 'react';
 
-var Poker = require('./components/Poker.react');
-var GoogleHangoutDAO = require('./dao/GoogleHangoutDAO');
+import Poker from './components/Poker.react';
+import GoogleHangoutDAO from './dao';
 
 GoogleHangoutDAO.init();
 
