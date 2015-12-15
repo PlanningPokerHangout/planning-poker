@@ -12,6 +12,7 @@ export default {
         path: 'publish/build',
         filename: '[name].js',
         chunkFilename: '[name].js',
+        publicPath: 'build'
     },
     module: {
         loaders: [{
