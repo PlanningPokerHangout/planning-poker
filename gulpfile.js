@@ -5,6 +5,7 @@ var gulp = require('gulp'),
     ghPages = require('gulp-gh-pages'),
     git = require('gulp-git'),
     spawn = require('child_process').spawn,
+    streamToPromise = require('stream-to-promise'),
     tag_version = require('gulp-tag-version');
 
 
@@ -28,7 +29,7 @@ function inc(importance) {
     var chgFilter = filter('CHANGELOG.md', {restore: true});
 
     // get all the files to bump version in 
-    return gulp.src(['./package.json', 'CHANGELOG.md'])
+    var stream = gulp.src(['./package.json', 'CHANGELOG.md'])
         // bump package.json version number
         .pipe(pkgFilter)
         .pipe(bump({type: importance}))
@@ -44,11 +45,12 @@ function inc(importance) {
         .pipe(chgFilter.restore)
 
         // commit
-        .pipe(git.commit('bumps package version'))
-        .pipe(pkgFilter)
+        .pipe(git.commit('bumps package version'));
 
-        // git tag
-        .pipe(tag_version());
+    stream.on('end', function() {
+        return gulp.src('./package.json')
+            .pipe(tag_version());
+    });
 }
 
 gulp.task('patch', function() { return inc('patch'); });
