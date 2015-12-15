@@ -1,7 +1,11 @@
-var gulp = require('gulp');
-var ghPages = require('gulp-gh-pages');
-var spawn = require('child_process').spawn;
-var copy = require('gulp-copy');
+var gulp = require('gulp'),
+    bump = require('gulp-bump'),
+    conventionalChangelog = require('gulp-conventional-changelog'),
+    filter = require('gulp-filter'),
+    ghPages = require('gulp-gh-pages'),
+    git = require('gulp-git'),
+    spawn = require('child_process').spawn,
+    tag_version = require('gulp-tag-version');
 
 
 gulp.task('webpack', function(cb) {
@@ -14,10 +18,42 @@ gulp.task('webpack', function(cb) {
 
 gulp.task('static', function() {
     gulp.src('static/**')
-        .pipe(copy('publish', {prefix: 1}));
+        .pipe(gulp.dest('publish'));
 });
 
 gulp.task('build', ['webpack', 'static']);
+
+function inc(importance) {
+    var pkgFilter = filter('package.json', {restore: true});
+    var chgFilter = filter('CHANGELOG.md', {restore: true});
+
+    // get all the files to bump version in 
+    return gulp.src(['./package.json', 'CHANGELOG.md'])
+        // bump package.json version number
+        .pipe(pkgFilter)
+        .pipe(bump({type: importance}))
+        .pipe(gulp.dest('./'))
+        .pipe(pkgFilter.restore)
+
+        // write changelog
+        .pipe(chgFilter)
+        .pipe(conventionalChangelog({
+            preset: "angular",
+        }))
+        .pipe(gulp.dest('./'))
+        .pipe(chgFilter.restore)
+
+        // commit
+        .pipe(git.commit('bumps package version'))
+        .pipe(pkgFilter)
+
+        // git tag
+        .pipe(tag_version());
+}
+
+gulp.task('patch', function() { return inc('patch'); });
+gulp.task('feature', function() { return inc('minor'); });
+gulp.task('release', function() { return inc('major'); });
 
 gulp.task('deploy', ['build'], function() {
     return gulp.src('./publish/**/*')
