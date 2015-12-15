@@ -1,13 +1,12 @@
-var React = require('react');
-
-var Actions = require('../actions/PlanningPokerActionCreators');
+import React from 'react';
+import { resetScores, toggleScoreDisplay } from '../actions';
 
 var Moderator = React.createClass({
     _resetScores: function() {
-        Actions.resetScores();
+        resetScores();
     },
     _toggleScores: function() {
-        Actions.toggleScoreDisplay();
+        toggleScoreDisplay();
     },
     render: function() {
         return (

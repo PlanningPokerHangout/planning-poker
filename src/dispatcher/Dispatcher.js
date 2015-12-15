@@ -10,7 +10,7 @@
  * @typechecks
  */
 
-var invariant = require('./invariant');
+import invariant from './invariant';
 
 var _lastID = 1;
 var _prefix = 'ID_';

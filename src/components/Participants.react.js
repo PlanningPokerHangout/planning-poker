@@ -1,10 +1,10 @@
-var React = require('react/addons');
+import React from 'react/addons';
 
-var ParticipantStore = require('../stores/ParticipantStore');
-var VoteStore = require('../stores/VoteStore');
-var SettingsStore = require('../stores/SettingsStore');
+import ParticipantStore from '../stores/ParticipantStore';
+import VoteStore from '../stores/VoteStore';
+import SettingsStore from '../stores/SettingsStore';
 
-var _ = require('underscore');
+import _ from 'underscore';
 
 var CHECK_MARK = "\u2713";
 

@@ -1,12 +1,12 @@
-var React = require('react/addons');
-var _ = require('underscore');
+import React from 'react/addons';
+import _ from 'underscore';
 
 // Stores
-var ParticipantStore = require('../stores/ParticipantStore');
-var VoteStore = require('../stores/VoteStore');
+import ParticipantStore from '../stores/ParticipantStore';
+import VoteStore from '../stores/VoteStore';
 
 // Components
-var VotingOption = require('./VotingOption.react');
+import VotingOption from './VotingOption.react';
 
 function _getStateFromStore() {
     return {

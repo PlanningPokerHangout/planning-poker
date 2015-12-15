@@ -1,11 +1,11 @@
-var React = require('react/addons');
+import React from 'react/addons';
 
 // Actions
-var Actions = require('../actions/PlanningPokerActionCreators');
+import { selectCard } from '../actions';
 
 var VotingOption = React.createClass({
     handleClick: function() {
-        Actions.selectCard(this.props.participantID, this.props.value);
+        selectCard(this.props.participantID, this.props.value);
     },
     render: function() {
         var cx = React.addons.classSet;

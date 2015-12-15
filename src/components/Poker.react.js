@@ -1,12 +1,12 @@
-var React = require('react/addons');
+import React from 'react/addons';
 
 // Components
-var Ballot = require('./Ballot.react');
-var Participants = require('./Participants.react');
-var Moderator = require('./Moderator.react');
+import Ballot from './Ballot.react';
+import Participants from './Participants.react';
+import Moderator from './Moderator.react';
 
 // Stores
-var SettingsStore = require('../stores/SettingsStore');
+import SettingsStore from '../stores/SettingsStore';
 
 function _getStateFromStore() {
     return {
