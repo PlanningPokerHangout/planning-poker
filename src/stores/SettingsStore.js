@@ -38,17 +38,22 @@ SettingsStore.dispatchToken = PlanningPokerAppDispatcher.register(function(paylo
   var action = payload.action;
 
   switch(action.type) {
-    case ActionTypes.TOGGLE_SCORE_DISPLAY:
-      toggleScoreDisplay();
-      SettingsStore.emitChange();
-      break;
-    case ActionTypes.INITIALIZED:
-      appIsInitialized = true;
-      SettingsStore.emitChange();
-      break;
-    default:
-      // do nothing
+  case ActionTypes.TOGGLE_SCORE_DISPLAY:
+    toggleScoreDisplay();
+    SettingsStore.emitChange();
+    break;
+  case ActionTypes.INITIALIZED:
+    appIsInitialized = true;
+    SettingsStore.emitChange();
+    break;
+  case ActionTypes.VOTES_CHANGED:
+    if(Object.keys(action.votes).length == 0) {
+      shouldDisplayScores = false;
     }
+    break;
+  default:
+    // do nothing
+  }
 });
 
 module.exports = SettingsStore;
