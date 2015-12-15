@@ -1,7 +1,9 @@
-var gulp = require('gulp');
-var ghPages = require('gulp-gh-pages');
-var spawn = require('child_process').spawn;
-var copy = require('gulp-copy');
+var gulp = require('gulp'),
+    ghPages = require('gulp-gh-pages'),
+    spawn = require('child_process').spawn,
+    git = require('gulp-git'),
+    bump = require('gulp-bump'),
+    tag_version = require('gulp-tag-version');
 
 
 gulp.task('webpack', function(cb) {
@@ -18,6 +20,23 @@ gulp.task('static', function() {
 });
 
 gulp.task('build', ['webpack', 'static']);
+
+function inc(importance) {
+    // get all the files to bump version in 
+    return gulp.src('./package.json')
+        // bump the version number in those files 
+        .pipe(bump({type: importance}))
+        // save it back to filesystem 
+        .pipe(gulp.dest('./'))
+        // commit the changed version number 
+        .pipe(git.commit('bumps package version'))
+        // **tag it in the repository** 
+        .pipe(tag_version());
+}
+
+gulp.task('patch', function() { return inc('patch'); });
+gulp.task('feature', function() { return inc('minor'); });
+gulp.task('release', function() { return inc('major'); });
 
 gulp.task('deploy', ['build'], function() {
     return gulp.src('./publish/**/*')
